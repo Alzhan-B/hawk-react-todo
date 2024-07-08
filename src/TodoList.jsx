@@ -1,3 +1,5 @@
+import TodoListItem from "./TodoListItem";
+
 const todoList = [
     {
       title: "Start task",
@@ -18,7 +20,9 @@ export default function TodoList() {
     <>
       <ul>
         {todoList.map(function (todoItem) {
-          return <li key={todoItem.id}>{todoItem.title}</li>;
+          return (
+            <TodoListItem key={todoItem.id} todo={todoItem} />
+          )
         })}
       </ul>
     </>
