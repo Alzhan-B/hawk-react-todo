@@ -7,6 +7,8 @@ export default function TodoListItem(props) {
 }
 
 TodoListItem.propTypes = {
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    todo: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+    }).isRequired
 }
