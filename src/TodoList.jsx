@@ -1,21 +1,6 @@
 import TodoListItem from "./TodoListItem";
 
-const todoList = [
-    {
-      title: "Start task",
-      id: 1,
-    },
-    {
-      title: "Review task",
-      id: 2,
-    },
-    {
-      title: "Complete task",
-      id: 3,
-    },
-  ];
-
-export default function TodoList() {
+export default function TodoList({todoList}) {
   return (
     <>
       <ul>
