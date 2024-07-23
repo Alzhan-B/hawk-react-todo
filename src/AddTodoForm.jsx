@@ -1,7 +1,7 @@
 import { useState } from "react" 
+import PropTypes from "prop-types"
 
 export default function AddTodoForm({onAddTodo}) {
-    const id = Date.now();
     const [todoTitle, setTodoTitle] = useState("")
 
     const handleTitleChange = (event) => {
@@ -11,8 +11,8 @@ export default function AddTodoForm({onAddTodo}) {
 
     const handleAddTodo = (event) => {
         event.preventDefault()
-          onAddTodo({title: todoTitle, id: Date.now()})
-          setTodoTitle(prevState => "")
+        onAddTodo({title: todoTitle, id: Date.now()})
+        setTodoTitle("")
     }
     return (
         <form onSubmit={handleAddTodo}>
@@ -22,3 +22,7 @@ export default function AddTodoForm({onAddTodo}) {
         </form>
     )
 }
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func.isRequired,
+    }.isRequired

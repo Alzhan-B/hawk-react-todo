@@ -1,4 +1,5 @@
-import TodoListItem from "./TodoListItem";
+import TodoListItem from "./TodoListItem"
+import PropTypes from "prop-types"
 
 export default function TodoList({todoList}) {
   return (
@@ -13,3 +14,7 @@ export default function TodoList({todoList}) {
     </>
   );
 }
+
+TodoList.propTypes = {
+  todoList: PropTypes.array.isRequired,
+  }.isRequired
