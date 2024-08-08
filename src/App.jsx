@@ -13,7 +13,22 @@ import { useEffect, useState } from "react";
 
 function App() {
   // const [todoList, setTodoList] = useSemiPersistentState();
-  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('savedTodoList')) || [])
+  const [todoList, setTodoList] = useState([])
+
+  useEffect(() => {
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const object = {
+          data: {
+            todoList: JSON.parse(localStorage.getItem('savedTodoList')) || []
+          },
+        };
+        resolve(object);
+      }, 2000);
+    }).then((result) => {
+      setTodoList(result.data.todoList)
+    });
+  }, [])
 
   useEffect(() => {localStorage.setItem('savedTodoList', JSON.stringify(todoList))}, [todoList])
 
