@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
 export function InputWithLabel(props) {
-    const inputRef = useRef()
+  const inputRef = useRef();
 
-    useEffect(() => {
-        inputRef.current.focus()
-    })
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   return (
     <>

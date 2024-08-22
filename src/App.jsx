@@ -3,68 +3,103 @@ import AddTodoForm from "./AddTodoForm";
 import "./App.css";
 import { useEffect, useState } from "react";
 
-// function useSemiPersistentState() {
-//   const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('savedTodoList')) || [])
-
-//   useEffect(() => {localStorage.setItem('savedTodoList', JSON.stringify(todoList))}, [todoList])
-
-//   return [todoList, setTodoList]
-// }
-
 function App() {
-  // const [todoList, setTodoList] = useSemiPersistentState();
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async() => {
-        
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization:`Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
-      }
-    }
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`
-    
+  // Reading data from airtable
+  const fetchData = async () => {
+    const options = {};
+    options.method = "GET";
+    options.headers = {
+      Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+    };
+    const url = `https://api.airtable.com/v0/${
+      import.meta.env.VITE_AIRTABLE_BASE_ID
+    }/${import.meta.env.VITE_TABLE_NAME}`;
+
     try {
       const response = await fetch(url, options);
-    
+
+      console.log(response);
+
       if (!response.ok) {
-        const message = `Error: ${response.status}`
-        throw new Error(message)
+        const message = `Error: ${response.status}`;
+        throw new Error(message);
       }
 
-      const data = await response.json()
-      console.log(data)
+      const data = await response.json();
+      console.log(data);
 
       const todos = data.records.map((todo) => ({
         id: todo.id,
-        title: todo.fields.title
+        title: todo.fields.title,
+        createdTime: todo.createdTime,
       }));
-      
+
       setTodoList(todos);
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
+  // Creting new data in airtable
+  const addNewTodo = async (newTodo) => {
+    const airtableData = {
+      fields: {
+        title: newTodo.title,
+      },
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify(airtableData),
+      // body: JSON.stringify({
+      //  records: [
+      //    {
+      //      fields: {
+      //        title: newTodo.title,
+      //      },
+      //    },
+      //  ],
+      // }),
+    };
+    const url = `https://api.airtable.com/v0/${
+      import.meta.env.VITE_AIRTABLE_BASE_ID
+    }/${import.meta.env.VITE_TABLE_NAME}`;
+
+    try {
+      const response = await fetch(url, options);
+
+      console.log(response);
+
+      if (!response.ok) {
+        const message = `Error: ${response.status}`;
+        throw new Error(message);
+      }
+
+      const data = await response.json();
+      console.log("returned data: ", data);
+
+      const updatedTodo = {
+        id: data.id,
+        title: data.fields.title,
+        createdTime: data.createdTime,
+      };
+
+      setTodoList([...todoList, updatedTodo]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
-    fetchData()
-    // new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     const object = {
-    //       data: {
-    //         todoList: JSON.parse(localStorage.getItem("savedTodoList")) || [],
-    //       },
-    //     };
-    //     resolve(object);
-    //   }, 2000);
-    // }).then((result) => {
-    //   setTodoList(result.data.todoList);
-    //   setIsLoading(false);
-    // });
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -74,7 +109,7 @@ function App() {
   }, [todoList, isLoading]);
 
   function addTodo(newTodo) {
-    setTodoList([...todoList, newTodo]);
+    addNewTodo(newTodo);
   }
 
   function removeTodo(id) {
