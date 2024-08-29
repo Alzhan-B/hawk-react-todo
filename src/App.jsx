@@ -134,13 +134,13 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+  //   }
+  // }, [todoList, isLoading]);
 
   function addTodo(newTodo) {
     addNewTodo(newTodo);
