@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
+import style from "./TodoListItem.module.css";
 
 export default function TodoListItem({ todo, onRemoveTodo, id }) {
   return (
-    <li>
+    <li className={style.ListItem}>
       {todo.title} <button onClick={() => onRemoveTodo(id)}>Remove</button>
     </li>
   );
