@@ -24,6 +24,12 @@ function App() {
     // }/${import.meta.env.VITE_TABLE_NAME}`;
 
     try {
+    // Sorting by Aritable view order and field via sending a request 
+      // const query1 = "?view=Grid%20view";
+      // const query2 = "&sort[0][field]=title";
+      // const query3 = "&sort[0][direction]=asc";
+      
+      // const response = await fetch(BASE_URL+`${query1 + query2 + query3}`, options);
       const response = await fetch(BASE_URL, options);
 
       console.log(response);
@@ -34,7 +40,7 @@ function App() {
       }
 
       const data = await response.json();
-      console.log(data);
+      console.log("data: ", data);
 
       const todos = data.records.map((todo) => ({
         id: todo.id,
@@ -42,7 +48,21 @@ function App() {
         createdTime: todo.createdTime,
       }));
 
-      setTodoList(todos);
+// Sorting with JavaScript
+      const sortedTodos = todos.sort((objectA, objectB) => {
+        const titleA = objectA.title.toLowerCase();
+        const titleB = objectB.title.toLowerCase();
+        if (titleA < titleB ) {
+          return -1;
+        } else if (titleA > titleB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      })
+
+      // setTodoList(todos);
+      setTodoList(sortedTodos);
     } catch (error) {
       console.log(error.message);
     }
