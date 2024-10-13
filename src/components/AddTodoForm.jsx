@@ -12,6 +12,7 @@ export default function AddTodoForm({onAddTodo}) {
 
     const handleAddTodo = (event) => {
         event.preventDefault()
+        if (!todoTitle) return;
         onAddTodo({title: todoTitle, id: Date.now()})
         setTodoTitle("")
     }
@@ -20,7 +21,7 @@ export default function AddTodoForm({onAddTodo}) {
             <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}>
                 Title
             </InputWithLabel>
-            <button type="submit">Add</button>
+            <button className="button-add" type="submit" disabled={!todoTitle}>Add</button>
         </form>
     )
 }

@@ -1,3 +1,22 @@
+/* .ListItem {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    color:rgb(178, 213, 242);
+
+} */
+
 .ListItem {
-    color:rgb(129, 167, 205);
-}
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+    transition: background 0.3s;
+  }
+
+  .ListItem:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
