@@ -1,3 +1,17 @@
 .ListItem {
-    color:rgb(129, 167, 205);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px;
+  border-radius: 5px;
+  background: rgb(20, 24, 29);
+  border: 1px solid rgb(11, 66, 107);
+  margin: 10px 0;
+  color: light;
+  transition: background 0.3s;
+}
+
+.ListItem:hover {
+  background: rgb(29, 44, 58);
+  border: 0.7px solid rgb(21, 115, 131);
 }

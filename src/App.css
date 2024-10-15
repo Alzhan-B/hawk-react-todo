@@ -1,6 +1,71 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0px;
+  padding: 0px;
   text-align: center;
+}
+
+.input-container {
+  display: flex;
+  background: rgb(22, 28, 34);
+  border-radius: 8px;
+
+  padding: 20px;
+  justify-content: space-around;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+#todoTitle {
+  background-color: rgb(34, 43, 51);
+}
+
+.sort-button {
+  background-color: rgb(15, 18, 20);
+  flex: 1;
+  width: 40%;
+  color: rgb(117, 188, 247);
+  border-color: rgb(8, 49, 80);
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.sort-button:hover {
+  background: rgb(17, 22, 26);
+  color: rgb(79, 228, 251);
+}
+
+.sort-button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.green-text {
+  color: rgb(79, 186, 79);
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  .sort-button {
+    width: 50%;
+    margin: 5px;
+  }
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .description {
+    font-size: small;
+    margin: 2rem;
+    background-color: red;
+  }
 }
