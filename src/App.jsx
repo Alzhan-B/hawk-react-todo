@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./components/TodoList";
 import AddTodoForm from "./components/AddTodoForm";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import Learn from "./components/Learn";
 import "./App.css";
 
 const BASE_URL = `https://api.airtable.com/v0/${
@@ -11,23 +14,15 @@ const BASE_URL = `https://api.airtable.com/v0/${
 function sortAscending(objectA, objectB) {
   return objectA < objectB ? -1 : objectA > objectB ? 1 : 0;
 }
-
 function sortDescending(objectA, objectB) {
   return objectA < objectB ? 1 : objectA > objectB ? -1 : 0;
 }
-
 function sortByCreatedTimeAsc(objectA, objectB) {
   return new Date(objectA.createdTime) - new Date(objectB.createdTime);
 }
-
 function sortByCreatedTimeDesc(objectA, objectB) {
   return new Date(objectB.createdTime) - new Date(objectA.createdTime);
 }
-
-// function sortByCreatedTimeDesc(objectA, objectB) {
-//   return new Date(objectB.createdTime) - new Date(objectA.createdTime);
-// }
-
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -63,14 +58,12 @@ function App() {
         id: todo.id,
         title: todo.fields.title,
         createdTime: todo.createdTime,
-        completed: todo.fields.completed || false // newly added
+        completed: todo.fields.completed || false, 
       }));
 
       // Sorting with JavaScript
-      // const sortedTodos = sortTodos(todos, sortAsc);
-      // const sortedTodos = sortTodos(todos);
-      // setTodoList(sortedTodos);
-      setTodoList(todos)
+    
+      setTodoList(todos, sortAsc);
       setIsLoading(false);
     } catch (error) {
       console.log(error.message);
@@ -111,10 +104,42 @@ function App() {
         id: data.id,
         title: data.fields.title,
         createdTime: data.createdTime,
-        completed: data.fields.completed || false
+        completed: data.fields.completed || false,
       };
 
       setTodoList([...todoList, updatedTodo]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // Toggling todo completion
+  const toggleTodoCompletion = async (id) => {
+    const todoToUpdate = todoList.find((todo) => todo.id === id);
+    const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({ fields: { completed: updatedTodo.completed } }),
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/${id}`, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      setTodoList((prevList) =>
+        prevList.map((todo) =>
+          todo.id === data.id
+            ? { ...todo, completed: updatedTodo.completed }
+            : todo
+        )
+      );
     } catch (error) {
       console.log(error.message);
     }
@@ -155,36 +180,19 @@ function App() {
     addNewTodo(newTodo);
   }
 
-  // function sortTodos(todos, sortAsc) {
-  //   return todos.sort((objectA, objectB) => {
-  //     if (sortAsc) {
-  //       return sortAscending(
-  //         objectA.title.toLowerCase(),
-  //         objectB.title.toLowerCase()
-  //       );
-  //     } else {
-  //       return sortDescending(
-  //         objectA.title.toLowerCase(),
-  //         objectB.title.toLowerCase()
-  //       );
-  //     }
-  //   });
-  // }
-
   function sortTodosByTitle(todos) {
     return todos.sort((objectA, objectB) => {
       return sortAsc
-              ? sortAscending(objectA.title.toLowerCase(), objectB.title.toLowerCase())
-              : sortDescending(objectA.title.toLowerCase(), objectB.title.toLowerCase());
-    })
+        ? sortAscending(
+            objectA.title.toLowerCase(),
+            objectB.title.toLowerCase()
+          )
+        : sortDescending(
+            objectA.title.toLowerCase(),
+            objectB.title.toLowerCase()
+          );
+    });
   }
-  // function sortTodos(todos) {
-  //   return todos.sort((objectA, objectB) => {
-  //      return sortAsc
-  //         ? sortAscending(objectA.title.toLowerCase(), objectB.title.toLowerCase())
-  //         : sortDescending(objectA.title.toLowerCase(), objectB.title.toLowerCase());
-  //   });
-  // }
 
   function sortTodosByCreatedTime(todos) {
     return todos.sort((objectA, objectB) => {
@@ -196,29 +204,35 @@ function App() {
 
   function handleSortToggleClick() {
     setSortAsc(!sortAsc);
-    // setTodoList((prevTodoList) => sortTodosByTitle(prevTodoList, !sortAsc));
-    setTodoList((prevTodoList) => sortTodosByTitle([...prevTodoList]));
+    setTodoList((prevTodoList) => sortTodosByTitle(prevTodoList, !sortAsc));
+    // setTodoList((prevTodoList) => sortTodosByTitle([...prevTodoList]));
   }
 
   function handleSortByCreatedTimeClick() {
     setSortCreatedTimeAsc(!sortCreatedTimeAsc);
     setTodoList((prevTodoList) => sortTodosByCreatedTime([...prevTodoList]));
+    // setTodoList((prevTodoList) => sortTodosByCreatedTime(prevTodoList, !sortAsc));
   }
 
   return (
     <BrowserRouter>
-    <h1>Todo List</h1>
+      <NavBar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/todos"
           element={
             <>
+              <h1>Todo List</h1>
               <div className="sort-button-containter">
                 <button onClick={handleSortToggleClick} className="sort-button">
                   Sort by Title
                 </button>
-                <button onClick={handleSortByCreatedTimeClick} className="sort-button">
-                  Sort by Time
+                <button
+                  onClick={handleSortByCreatedTimeClick}
+                  className="sort-button"
+                >
+                  Sort by Date
                 </button>
               </div>
 
@@ -226,12 +240,17 @@ function App() {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                <TodoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                  onToggleComplete={toggleTodoCompletion}
+                />
               )}
             </>
           }
         />
-        <Route path="/new" element={<h1>New Todo List</h1>} />
+        {/* <Route path="/todos" element={<TodoList />} /> */}
+        <Route path="/learn" element={<Learn />} />
       </Routes>
     </BrowserRouter>
   );

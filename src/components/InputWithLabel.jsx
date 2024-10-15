@@ -10,7 +10,9 @@ export function InputWithLabel(props) {
 
   return (
     <>
-      <label htmlFor="todoTitle">{props.children} </label>
+      <label htmlFor="todoTitle" className="label">
+        {props.children}
+      </label>
       <input
         value={props.todoTitle}
         onChange={props.handleTitleChange}

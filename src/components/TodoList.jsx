@@ -1,7 +1,7 @@
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
 
-export default function TodoList({ todoList, onRemoveTodo }) {
+export default function TodoList({ todoList, onRemoveTodo, onToggleComplete }) {
   return (
     <>
       <ul>
@@ -11,6 +11,7 @@ export default function TodoList({ todoList, onRemoveTodo }) {
               key={todoItem.id}
               todo={todoItem}
               onRemoveTodo={onRemoveTodo}
+              onToggleComplete={onToggleComplete}
               id={todoItem.id}
             />
           );
@@ -23,6 +24,7 @@ export default function TodoList({ todoList, onRemoveTodo }) {
 // TodoList.propTypes = {
 //   todoList: PropTypes.array.isRequired,
 //   onRemoveTodo: PropTypes.func.isRequired,
+//   onToggleComplete: PropTypes.func.isRequired,
 // }.isRequired;
 
 TodoList.propTypes = {
@@ -30,7 +32,9 @@ TodoList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
     })
   ).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
-};
+  onToggleComplete: PropTypes.func.isRequired,
+}.isRequired;

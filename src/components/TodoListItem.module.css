@@ -1,22 +1,29 @@
-/* .ListItem {
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    color:rgb(178, 213, 242);
-
-} */
-
 .ListItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 10px 0;
-    transition: background 0.3s;
-  }
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  padding: 9px;
+  border-radius: 5px;
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* background: rgb(35, 40, 44); */
+  /* background: rgb(18, 24, 30); */ 
+  background: rgb(20, 24, 29);
+  /* border: 1px solid rgb(8, 49, 80); */
+  border: 1px solid rgb(11, 66, 107);
+  margin: 10px 0;
+  color: light;
+  transition: background 0.3s;
+  
+  /* border-top: 1px solid #888; */
+  /* box-shadow: 0.9px 0.9px 1.3px rgb(43, 76, 133); */
+  /* box-shadow: 0.9px 0.9px 1px rgb(8, 49, 80);; */
+}
 
-  .ListItem:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
+.ListItem:hover {
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* background-color: rgb(22, 34, 42); */
+  /* background-color: rgb(19, 38, 71); */
+  background: rgb(27, 36, 45); 
+  border: 0.7px solid rgb(39, 116, 130);
+}
+

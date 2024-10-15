@@ -1,35 +1,101 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0px;
+  /* padding: 2rem; */
+  padding: 0px;
   text-align: center;
 }
 
-.container {
-  background: #2a2a2a;
+/* .nav{
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+} */
+
+.input-container {
+  display: flex;
+  /* background: #2a2a2a; */
+  background: rgb(22, 28, 34);
+  /* background: rgb(35, 40, 44); */
+  /* background: rgb(15, 18, 20); */
   border-radius: 8px;
+  
   padding: 20px;
+  justify-content: space-around;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+#todoTitle {
+  background-color: rgb(34, 43, 51);
 }
 
 .sort-button {
-  background-color: rgb(62, 73, 113);
+  /* background-color: rgb(62, 73, 113); */
+  /* background-color: rgb(0 66 122); */
+  background-color: rgb(15, 18, 20);
+  
+  flex: 1; 
   width: 40%;
-  color: white;
-  border: 1px;
-  border-color: wheat;
+  color: rgb(117, 188, 247);
+  /* border: none; */
+  border-color: rgb(8, 49, 80);
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin: auto;
+  margin: 0 10px;
+  /* font-size: x-small; */
 }
 
 .sort-button:hover {
-  background-color: rgb(67, 92, 194);
+  /* background-color: rgb(67, 92, 194); */
+  /* background-color: rgb(19, 38, 71); */
+  background: rgb(18, 24, 30);
 }
 
-.sort-button-containter {
+.sort-button-container {
   display: flex;
-  justify-content:space-around;
-  margin-bottom: 1rem;
+  justify-content: space-around;
+}
+
+@media (max-width: 480px) {
+  /* h1 {
+    font-size: 0.5rem;
+  } */
+
+  .container {
+    padding: 15px;
+  }
+
+  .sort-button {
+    width: 50%;
+    margin: 5px;
+  }
+
+  /* h1 {
+    font-size: 12.5em;
+  } */
+
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    /* background-color: red; */
+  }
+
+  .description {
+    font-size: small;
+    margin: 2rem;
+    background-color: red;
+  }
+}
+
+
+.green-text {
+  color: rgb(46, 147, 46);
 }
