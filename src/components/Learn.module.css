@@ -1,81 +1,39 @@
-/* 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #1e1e1e;
-    padding: 20px;
-  }
-  
-  .title {
-    text-align: center;
-    color: #e0e0e0;
-    margin-bottom: 20px;
-    font-size: 2.5em;
-  }
-  
-  .description {
-    text-align: center;
-    color: #b0b0b0;
-    margin-bottom: 30px;
-    font-size: 1.2em;
-    line-height: 1.5;
-  }
-  
-  
-  .image {
-    cursor: pointer; 
-    width: 100px; 
-    height: auto; 
-    transition: transform 0.3s; 
-    border: 1px solid rgb(76, 100, 139);
-  }
-  
-  .image:hover {
-    transform: scale(1.05); 
-    border: 2px solid rgb(188, 82, 25);
-  } */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #111a23;
+  padding: 4rem;
+  max-width: 30rem;
+  margin: 0 auto;
+}
 
+.title {
+  text-align: center;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+  margin-top: 0;
+  font-size: 2.5em;
+}
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    min-height: 100vh;
-    background-color: #111a23;
-    padding: 4rem;
-    max-width: 30rem; /* Limit maximum width */
-    margin: 0 auto; /* Center container */
-  }
-  
-  .title {
-    text-align: center;
-    color: #e0e0e0;
-    margin-bottom: 20px;
-    margin-top: 0;
-    font-size: 2.5em;
-  }
-  
-  .description {
-    text-align: center;
-    color: #b0b0b0;
-    margin-bottom: 30px;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
+.description {
+  text-align: center;
+  color: #b0b0b0;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
 
-  .image {
-    cursor: pointer; 
-    width: 100px; 
-    height: auto; 
-    transition: transform 0.3s; 
-    border: 1px solid rgb(76, 100, 139);
-  }
-  
-  .image:hover {
-    transform: scale(1.05); 
-    border: 2px solid rgb(188, 82, 25);
-  } 
+.image {
+  cursor: pointer;
+  width: 100px;
+  height: auto;
+  transition: transform 0.3s;
+  border: 1px solid rgb(76, 100, 139);
+}
+
+.image:hover {
+  transform: scale(1.05);
+  border: 2px solid rgb(188, 82, 25);
+}

@@ -6,9 +6,10 @@ const Learn = () => {
     <div className={style.container}>
       <h1 className={style.title}>Learn to Code</h1>
       <p className={style.description}>
-        Join <strong> Code the Dream </strong> to unlock the world of coding! You will get valuable
-        resources and hands-on guidance on how to create amazing applications.
-        This is your chance to embark on an exciting coding journey!
+        Join <strong> Code the Dream </strong> to unlock the world of coding!
+        You will get valuable resources and hands-on guidance on how to create
+        amazing applications. This is your chance to embark on an exciting
+        coding journey!
       </p>
       <p>Click Image Below</p>
       <a

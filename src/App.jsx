@@ -30,7 +30,6 @@ function App() {
   const [sortAsc, setSortAsc] = useState(true);
   const [sortCreatedTimeAsc, setSortCreatedTimeAsc] = useState(true);
 
-  // Reading data from airtable
   const fetchData = async () => {
     const options = {
       method: "GET",
@@ -58,11 +57,10 @@ function App() {
         id: todo.id,
         title: todo.fields.title,
         createdTime: todo.createdTime,
-        completed: todo.fields.completed || false, 
+        completed: todo.fields.completed || false,
       }));
 
       // Sorting with JavaScript
-    
       setTodoList(todos, sortAsc);
       setIsLoading(false);
     } catch (error) {
@@ -71,7 +69,6 @@ function App() {
     }
   };
 
-  // Creting new data in airtable - POST Method
   const addNewTodo = async (newTodo) => {
     const airtableData = {
       fields: {
@@ -113,7 +110,6 @@ function App() {
     }
   };
 
-  // Toggling todo completion
   const toggleTodoCompletion = async (id) => {
     const todoToUpdate = todoList.find((todo) => todo.id === id);
     const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
@@ -145,7 +141,6 @@ function App() {
     }
   };
 
-  // Deleteing data from airtable - DELETE Method
   const removeTodo = async (id) => {
     const options = {
       method: "DELETE",
@@ -205,13 +200,11 @@ function App() {
   function handleSortToggleClick() {
     setSortAsc(!sortAsc);
     setTodoList((prevTodoList) => sortTodosByTitle(prevTodoList, !sortAsc));
-    // setTodoList((prevTodoList) => sortTodosByTitle([...prevTodoList]));
   }
 
   function handleSortByCreatedTimeClick() {
     setSortCreatedTimeAsc(!sortCreatedTimeAsc);
     setTodoList((prevTodoList) => sortTodosByCreatedTime([...prevTodoList]));
-    // setTodoList((prevTodoList) => sortTodosByCreatedTime(prevTodoList, !sortAsc));
   }
 
   return (
@@ -249,7 +242,6 @@ function App() {
             </>
           }
         />
-        {/* <Route path="/todos" element={<TodoList />} /> */}
         <Route path="/learn" element={<Learn />} />
       </Routes>
     </BrowserRouter>

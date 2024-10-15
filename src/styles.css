@@ -16,16 +16,13 @@
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  /* padding: 0 20px; */
 }
 
 h1 {
   font-size: 1.2em;
-  /* line-height: 1.1; */
 }
 
 .button-add {
@@ -63,7 +60,6 @@ form {
   justify-content: space-between;
 }
 
-/* checkboxes */
 input {
   padding: 0.5em;
   font-size: 1em;
