@@ -36,7 +36,8 @@
 }
 
 .sort-button:hover {
-  background: rgb(18, 24, 30);
+  background: rgb(17, 22, 26);
+  color: rgb(79, 228, 251);
 }
 
 .sort-button-container {
@@ -45,7 +46,7 @@
 }
 
 .green-text {
-  color: rgb(46, 147, 46);
+  color: rgb(79, 186, 79);
 }
 
 @media (max-width: 480px) {

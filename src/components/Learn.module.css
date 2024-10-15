@@ -36,4 +36,5 @@
 .image:hover {
   transform: scale(1.05);
   border: 2px solid rgb(188, 82, 25);
+  box-shadow: 2px 2px 10px rgb(245, 165, 17);
 }
